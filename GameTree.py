@@ -32,20 +32,6 @@ def numInline(x,y,v):
     while(sameColor(i,j,ref)):
         s=s+1; i=i+dx[v]; j=j+dy[v]
     return s
-#该点四个方向里(即v不区分正负)，活一局势的个数
-def liveOne(x,y):
-    key=N[x][y]; s=0
-    for u in range(4):
-        samekey=1
-        samekey,i=numofSamekey(x,y,u,1,key,samekey)
-        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
-            continue
-        samekey,i=numofSamekey(x,y,u,-1,key,samekey)
-        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
-            continue
-        if(samekey==1):
-            s=s+1
-    return s
 #该点四个方向里(即v不区分正负)，活二局势的个数
 def liveTwo(x,y):
     key=N[x][y]; s=0
