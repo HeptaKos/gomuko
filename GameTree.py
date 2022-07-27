@@ -32,6 +32,34 @@ def numInline(x,y,v):
     while(sameColor(i,j,ref)):
         s=s+1; i=i+dx[v]; j=j+dy[v]
     return s
+#该点四个方向里(即v不区分正负)，活一局势的个数
+def liveOne(x,y):
+    key=N[x][y]; s=0
+    for u in range(4):
+        samekey=1
+        samekey,i=numofSamekey(x,y,u,1,key,samekey)
+        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
+            continue
+        samekey,i=numofSamekey(x,y,u,-1,key,samekey)
+        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
+            continue
+        if(samekey==1):
+            s=s+1
+    return s
+#该点四个方向里(即v不区分正负)，活二局势的个数
+def liveTwo(x,y):
+    key=N[x][y]; s=0
+    for u in range(4):
+        samekey=1
+        samekey,i=numofSamekey(x,y,u,1,key,samekey)
+        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
+            continue
+        samekey,i=numofSamekey(x,y,u,-1,key,samekey)
+        if(not downOk(x+dx[u]*i,y+dy[u]*i)):
+            continue
+        if(samekey==2):
+            s=s+1
+    return s
 #该点四个方向里(即v不区分正负)，活四局势的个数
 def liveFour(x,y):
     key=N[x][y]; s=0
@@ -45,6 +73,38 @@ def liveFour(x,y):
             continue
         if(samekey==4):
             s=s+1
+    return s
+#该点四个方向里(即v不区分正负)，眠二局势的个数
+def SleepTwo(x,y):
+    key = N[x][y]
+    s = 0
+    for u in range(4):
+        sign=0
+        samekey = 1
+        samekey, i = numofSamekey(x, y, u, 1, key, samekey)
+        if not downOk(x + dx[u] * i, y + dy[u] * i):
+            sign+=1
+        samekey, i = numofSamekey(x, y, u, -1, key, samekey)
+        if not downOk(x + dx[u] * i, y + dy[u] * i):
+            sign+=1
+        if samekey == 2 and sign == 1:
+            s = s + 1
+    return s
+#该点四个方向里(即v不区分正负)，眠三局势的个数
+def SleepThree(x,y):
+    key = N[x][y]
+    s = 0
+    for u in range(4):
+        sign=0
+        samekey = 1
+        samekey, i = numofSamekey(x, y, u, 1, key, samekey)
+        if not downOk(x + dx[u] * i, y + dy[u] * i):
+            sign+=1
+        samekey, i = numofSamekey(x, y, u, -1, key, samekey)
+        if not downOk(x + dx[u] * i, y + dy[u] * i):
+            sign+=1
+        if samekey == 3 and sign == 1:
+            s = s + 1
     return s
 #该点八个方向里(即v区分正负)，冲四局势的个数
 def chongFour(x,y):
@@ -147,8 +207,6 @@ def in_mp():
     N=[['.']*15 for i  in range(15)]
     st=0
 #构建空棋盘
-
-
 def fall(x,y):
     global st,H,B
     x=ord(x)-ord('a')
