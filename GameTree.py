@@ -183,7 +183,7 @@ def getScore(x,y):
     if(gameOver(x,y)):
         is_end=False
         return 10000
-    score=liveFour(x,y)*1000+(chongFour(x,y)+liveThree(x,y))*100
+    score=liveFour(x,y)*1000+(chongFour(x,y)+liveThree(x,y))*800+LiveTwo(x,y)*400+SleepTwo(x,y)*200+SleepThree(x,y)*300
     for u in range(8):
         if(inBoard(x+dx[u],y+dy[u]) and N[x+dx[u]][y+dy[u]]!='.'):
             score=score+1
